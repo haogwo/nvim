@@ -50,4 +50,21 @@ vim.cmd([[
 vim.cmd [[
     autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 expandtab
     autocmd FileType json setlocal shiftwidth=2 tabstop=2 expandtab
+    autocmd FileType lua setlocal shiftwidth=2 tabstop=2 expandtab
 ]]
+
+--- Enable clipboard with OSC 52 ---
+if vim.fn.has('nvim-0.10') == 1 then
+    vim.g.clipboard = {
+        name = 'OSC 52',
+        copy = {
+            ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+        },
+        paste = {
+            ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+            ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+        },
+    }
+end
+

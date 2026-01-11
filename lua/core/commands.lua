@@ -8,3 +8,11 @@ vim.api.nvim_create_user_command('CopyPath', function()
     vim.fn.setreg('+', path)
     print('Path (' .. path .. ') has been copied to clipboard')
 end, {})
+
+vim.api.nvim_create_user_command("Format", function()
+  require("conform").format({
+    async = true,
+    lsp_fallback = true,
+  })
+end, {})
+
