@@ -1,0 +1,10 @@
+vim.api.nvim_create_user_command('ShowPath', function()
+    local path = vim.fn.expand('%:p')
+    print(path)
+end, {})
+
+vim.api.nvim_create_user_command('CopyPath', function()
+    local path = vim.fn.expand('%:p')
+    vim.fn.setreg('+', path)
+    print('Path (' .. path .. ') has been copied to clipboard')
+end, {})
