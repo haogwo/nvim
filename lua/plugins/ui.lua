@@ -177,4 +177,49 @@ return {
       extensions = {}
     }
   },
+  {
+    "hedyhli/outline.nvim",
+    dependencies = { "onsails/lspkind-nvim" },
+    cmd = { "Outline", "OutlineOpen" },
+    keys = {
+      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    config = function()
+      local lspkind = require("lspkind")
+      local symbol_map = lspkind.symbol_map
+
+      require("outline").setup({
+        symbols = {
+          icons = {
+            File = { icon = symbol_map.File, hl = "Tag" },
+            Module = { icon = symbol_map.Module, hl = "Include" },
+            Namespace = { icon = symbol_map.Namespace, hl = "Include" },
+            Package = { icon = symbol_map.Package, hl = "Label" },
+            Class = { icon = symbol_map.Class, hl = "Include" },
+            Method = { icon = symbol_map.Method, hl = "Function" },
+            Property = { icon = symbol_map.Property, hl = "Identifier" },
+            Field = { icon = symbol_map.Field, hl = "Identifier" },
+            Constructor = { icon = symbol_map.Constructor, hl = "Special" },
+            Enum = { icon = symbol_map.Enum, hl = "Type" },
+            Interface = { icon = symbol_map.Interface, hl = "Type" },
+            Function = { icon = symbol_map.Function, hl = "Function" },
+            Variable = { icon = symbol_map.Variable, hl = "Constant" },
+            Constant = { icon = symbol_map.Constant, hl = "Constant" },
+            String = { icon = symbol_map.String, hl = "String" },
+            Number = { icon = symbol_map.Number, hl = "Number" },
+            Boolean = { icon = symbol_map.Boolean, hl = "Boolean" },
+            Array = { icon = symbol_map.Array, hl = "Constant" },
+            Object = { icon = symbol_map.Object, hl = "Type" },
+            Key = { icon = symbol_map.Key, hl = "Type" },
+            Null = { icon = symbol_map.Null, hl = "Type" },
+            EnumMember = { icon = symbol_map.EnumMember, hl = "Identifier" },
+            Struct = { icon = symbol_map.Struct, hl = "Structure" },
+            Event = { icon = symbol_map.Event, hl = "Type" },
+            Operator = { icon = symbol_map.Operator, hl = "Identifier" },
+            TypeParameter = { icon = symbol_map.TypeParameter, hl = "Identifier" },
+          },
+        },
+      })
+    end,
+  },
 }

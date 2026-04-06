@@ -31,7 +31,7 @@ return {
           -- LSP
           "basedpyright",   -- 现代 Python 核心
           "lua_ls",         -- Neovim 配置支持
-          "vue-language-server", -- Vue SFC 支持
+          -- volar (vue-language-server) 通过 :MasonInstall vue-language-server 手动安装
         },
       })
 
