@@ -51,16 +51,49 @@ opt.directory = swap_dir
 opt.undofile = true
 opt.undodir = undo_dir
 
--- --- Enable clipboard with OSC 52 ---
--- vim.g.clipboard = {
---     name = 'OSC 52',
---     copy = {
---         ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
---         ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
---     },
---     paste = {
---         ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
---         ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
---     },
--- }
+--- Enable clipboard with OSC 52 ---
+-- 优先直写主 client 的 tty（绕过 tmux 拦截），不可用时回退到内置实现
+local osc52_mod = require('vim.ui.clipboard.osc52')
+
+local function osc52_direct_copy(text)
+    local tty_file = '/tmp/tmux-main-tty-' .. (vim.env.USER or '')
+    local f = io.open(tty_file, 'r')
+    if not f then
+        return false
+    end
+    local tty = f:read('*l')
+    f:close()
+    if not tty then
+        return false
+    end
+    local out = io.open(tty, 'w')
+    if not out then
+        return false
+    end
+    out:write('\x1b]52;c;' .. vim.base64.encode(text) .. '\x07')
+    out:flush()
+    out:close()
+    return true
+end
+
+local function make_copy_handler(reg)
+    return function(lines, _)
+        local text = table.concat(lines, '\n')
+        if not osc52_direct_copy(text) then
+            osc52_mod.copy(reg)(lines, _)
+        end
+    end
+end
+
+vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+        ['+'] = make_copy_handler('+'),
+        ['*'] = make_copy_handler('*'),
+    },
+    paste = {
+        ['+'] = osc52_mod.paste('+'),
+        ['*'] = osc52_mod.paste('*'),
+    },
+}
 
