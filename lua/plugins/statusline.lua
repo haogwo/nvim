@@ -1,4 +1,12 @@
 local palette = require("xuantong.palette")
+local filetype_icon_fg = palette.ansi[7]
+
+local function filetype_icon()
+    local devicons = require("nvim-web-devicons")
+    local icon = devicons.get_icon(vim.fn.expand("%:t"))
+        or devicons.get_icon_by_filetype(vim.bo.filetype)
+    return icon or ""
+end
 
 local function mode_colors(accent)
     return {
@@ -50,12 +58,22 @@ require("lualine").setup({
                     error = " ",
                     warn = " ",
                     info = " ",
-                    hint = "💡 ",
+                    hint = "󰌵 ",
                 },
             },
         },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
+        lualine_x = {
+            "encoding",
+            "fileformat",
+            {
+                filetype_icon,
+                color = { fg = filetype_icon_fg },
+                padding = { left = 1, right = 0 },
+                separator = "",
+            },
+            { "filetype", icons_enabled = false, padding = { left = 1, right = 1 } },
+        },
         lualine_y = { "progress" },
         lualine_z = { "location" },
     },
