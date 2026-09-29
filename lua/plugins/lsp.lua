@@ -1,4 +1,24 @@
 local severity = vim.diagnostic.severity
+local palette = require("xuantong.palette")
+
+local underline_colors = {
+  Error = palette.ansi[2],
+  Warn = palette.ansi[4],
+  Info = palette.ansi[7],
+  Hint = palette.ansi[5],
+}
+
+local function apply_diagnostic_undercurls()
+  for level, color in pairs(underline_colors) do
+    vim.api.nvim_set_hl(0, "DiagnosticUnderline" .. level, { undercurl = true, sp = color })
+  end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("user_diagnostic_undercurls", { clear = true }),
+  callback = apply_diagnostic_undercurls,
+})
+apply_diagnostic_undercurls()
 
 vim.diagnostic.config({
   signs = {
