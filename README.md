@@ -49,7 +49,7 @@ Python 和 Go 的 Tree-sitter 解析器会自动安装；其他语言需要另�
 Telescope 使用 `<leader>ff` 查找文件、`<leader>fg` 搜索内容、`<leader>fb` 切换缓冲区、
 `<leader>fh` 查找帮助、`<leader>fe` 从当前文件目录开始浏览。文件浏览器和 fzf 排序扩展已启用。
 
-LSP 使用 Neovim 内置客户端。Mason 首次启动时安装 Python 的 basedpyright、
+LSP 使用 Neovim 内置客户端。Mason 首次启动时安装 Python 的 pyrefly、
 Go 的 gopls、JSON 的 jsonls 和 Lua 的 lua-language-server；安装状态可通过 `:Mason` 查看。
 `blink.cmp` 在插入模式提供补全：`<C-Space>` 打开菜单，`<Tab>` / `<S-Tab>` 选择候选项
 或跳转片段占位符，`<CR>` / `<C-y>` 接受候选项，`<C-e>` 取消补全，
@@ -60,7 +60,9 @@ Go 的 gopls、JSON 的 jsonls 和 Lua 的 lua-language-server；安装状态可
 JSON 由 SchemaStore 提供常见文件的 Schema；Go 补全启用参数占位符。
 Lua 使用 LuaJIT 运行时，并索引 Neovim 的运行时文件；单个 Lua 文件也能获得诊断，
 项目自己的 `.luarc.json` 设置仍优先。
-gopls 的安装需要本机有 Go 工具链，jsonls 需要 Node.js/npm，basedpyright 需要 Python 包安装环境。
+gopls 的安装需要本机有 Go 工具链，jsonls 需要 Node.js/npm，pyrefly 需要 Python 包安装环境。
+Pyrefly 在没有项目配置文件时使用 `default` 类型检查模式；项目的 `pyrefly.toml` 或
+`pyproject.toml` 中的 `[tool.pyrefly]` 设置仍优先。Django 项目还需在项目环境中安装 `django-stubs`。
 
 「玄同」是[独立主题项目](https://github.com/haogwo/xuantong)，包含自己的配色入口、
 调色板、Python 高亮模块和验证脚本。当前配置通过 `vim.pack` 从 GitHub 安装。

@@ -53,6 +53,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = { "basedpyright", "gopls", "jsonls", "lua_ls" },
-  automatic_enable = { "basedpyright", "gopls", "jsonls", "lua_ls" },
+  ensure_installed = { "pyrefly", "gopls", "jsonls", "lua_ls" },
+  automatic_enable = { "pyrefly", "gopls", "jsonls", "lua_ls" },
 })
