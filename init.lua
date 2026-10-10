@@ -8,6 +8,7 @@ require("core.options")
 
 require("plugins")
 require("plugins.theme")
+require("plugins.gitsigns")
 require("plugins.treesitter")
 require("plugins.rainbow")
 require("plugins.hlchunk")
