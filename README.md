@@ -14,6 +14,7 @@
 - `lua/plugins/hlchunk.lua`：代码块边框和块内行号
 - `lua/plugins/pairs.lua`：自动补全括号和引号
 - `lua/plugins/statusline.lua`：lualine 状态栏和顶部 buffer/tab 栏
+- `lua/plugins/gitsigns.lua`：Git 改动标记和操作命令
 - `lua/plugins/telescope.lua`：文件查找、内容搜索与目录浏览
 - `lua/plugins/todo_comments.lua`：TODO 等注释标记高亮和检索
 - `lua/plugins/completion.lua`：自动补全菜单、文档预览和函数签名
@@ -35,6 +36,13 @@ Neovim 自动选择可用的系统剪贴板提供器。
 
 顶部显示 buffer 和 tab；每个窗口的状态栏显示模式、Git 分支及改动、
 诊断、文件名、编码、换行格式、文件类型、进度和光标位置。状态栏使用「玄同」调色板。
+
+gitsigns 在行号旁用 `+`、`~` 和 `-` 显示 Git 新增、修改和删除；
+使用独立的绿、黄、红标记配色；Git 弹窗和差异预览的背景与玄同编辑区一致。
+已暂存的改动也显示标记。超过 40000 行的文件不启用。可用 `:GitNextHunk` 和
+`:GitPrevHunk` 跳转改动，`:GitPreviewHunk` 预览，`:GitToggleStageHunk` 暂存或取消暂存，
+`:GitBlameLine` 查看当前行提交信息，`:GitDiffFile` 对比当前文件与 Git 暂存区。
+这些操作没有绑定快捷键。改动预览和逐行 blame 弹窗使用圆角边框，宽度不超过 100 列。
 
 彩虹括号使用 `rainbow-delimiters.nvim`，颜色来自「玄同」调色板；超过大小阈值的缓冲区不启用。
 Python 和 Go 的 Tree-sitter 解析器会自动安装；其他语言需要另行配置。

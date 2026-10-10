@@ -9,6 +9,10 @@
       "src": "https://github.com/Saghen/blink.cmp",
       "version": "'v1'"
     },
+    "gitsigns.nvim": {
+      "rev": "851a051e2bd2caba97e23314c68d69f1b1cf5d19",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "hlchunk.nvim": {
       "rev": "4ddc056e4ca45f1c7dc6aa21935df710b263b1aa",
       "src": "https://github.com/shellRaining/hlchunk.nvim"
